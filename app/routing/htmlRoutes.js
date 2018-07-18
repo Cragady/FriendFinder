@@ -12,9 +12,9 @@ router.get("/survey", function(req, res){
     res.sendFile(path.join(__dirname, "../public/survey.html"));
 });
 
-router.get("/app/front-js/front", function(req, res){
-    res.sendFile(path.join(__dirname, "../front-js/front.js"));
-    console.log("success");
-});
+// router.get("/app/front-js/front", function(req, res){
+//     res.sendFile(path.join(__dirname, "../front-js/front.js"));
+//     console.log("success");
+// });
 
 module.exports = router;
