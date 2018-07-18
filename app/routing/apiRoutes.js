@@ -15,6 +15,7 @@ router.use(bodyParser.json());
 
 router.get("/api/friends", function(req, res){
     console.log(friends[1]);
+    res.send(console.log(friends[1]));
 });
 
 module.exports = router;
