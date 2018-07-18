@@ -1,20 +1,15 @@
-var express = require("express");
-var bodyParser = require("body-parser");
-var path = require("path");
+var express = require("express"),
+    bodyParser = require("body-parser"),
+    path = require("path");
+    app = express(),
+    htmlRoutes = require("./app/routing/htmlRoutes.js")(app),
+    PORT =  process.env.PORT || 3000;
 
-var app = express();
-var PORT =  process.env.PORT || 3000;
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
-app.get("/", function(req, res){
-    res.sendFile(path.join(__dirname, "/app/public/home.html"));
-});
-
-app.get("/survey", function(req, res){
-    res.sendFile(path.join(__dirname, "/app/public/survey.html"));
-});
+app.use("/htmlRoutes", htmlRoutes);
 
 app.listen(PORT, function(){
     console.log("App listening on PORT " + PORT);
