@@ -3,13 +3,7 @@ var express = require("express"),
     router = express.Router(),
     path = require("path");
 
-    router.use(function timeLog(req, res, next) {
-        console.log('Time: ', Date.now());
-        next();
-      });
-
     router.get("/", function(req, res){
-        console.log("hit");
         res.sendFile(path.join(__dirname, "../public/home.html"));
     });
     
