@@ -34,14 +34,16 @@ if($("#questionairre")){
     });
 };
 
-$("#tester-bb").click(function(){
-    $("#friendo-show-o").empty();
-    $.get("/api/friends/", function(data){
-        for(var prop in data[0]){
-            $("#friendo-show-o").append("<h1>" + data[0][prop] + "</h1>");
-        };
+function submitSurvey(passed){
+    $("#tester-bb").click(function(){
+        $("#friendo-show-o").empty();
+        $.get("/api/friends/", function(data){
+            for(var prop in data[0]){
+                $("#friendo-show-o").append("<h1>" + data[0][prop] + "</h1>");
+            };
+        });
     });
-});
+};
 
 $(".btn-choices-in").click(function(){
     $.each(questions, function(i){
@@ -54,5 +56,5 @@ $(".btn-choices-in").click(function(){
         };
     };
     $("#tester-bb").prop("disabled", false);
+    submitSurvey(friendNums);
 });
-
