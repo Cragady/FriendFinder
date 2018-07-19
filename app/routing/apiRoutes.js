@@ -14,8 +14,7 @@ router.use(bodyParser.urlencoded({extended: true}));
 router.use(bodyParser.json());
 
 router.get("/api/friends", function(req, res){
-    console.log(friends[1]);
-    res.send(console.log(friends[1]));
+    return res.json(friends);
 });
 
 module.exports = router;

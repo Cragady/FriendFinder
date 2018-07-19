@@ -13,7 +13,7 @@
 
         <header class="jumbotron">
             <div class="row">
-                <h1 class="col text-center">Friend Finder!</h1>
+                <h1 class="col text-center">Home</h1>
             </div>
             <section class="row">
                 <div class="col text-center">
@@ -21,14 +21,31 @@
                     <a href="/survey"><button class="btn btn-primary">Survey</button></a>
                 </div>
                 <div class="col col-12 text-center my-1">
-                    <a href="/api/friends"><button class="btn btn-primary">Tester bb!</button></a>
+                    <button type="button" class="btn btn-primary" id="tester-bb" data-toggle="modal" data-target="#exampleModal">Tester bb!</button>
                 </div>
             </section>
         </header>
 
-        <div id="friendo-show-o">
-            
-        </div>
+        <section class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Matched Friend</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" id="friendo-show-o"></div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="crass">
+
+        </section>
 
     </div>
 
