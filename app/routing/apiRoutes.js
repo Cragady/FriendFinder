@@ -17,4 +17,11 @@ router.get("/api/friends", function(req, res){
     return res.json(friends);
 });
 
+router.post("/api/friends", function(req, res){
+    var newFriend = req.body;
+    newFriend.routeName = newFriend.name.replace(/\s+/g, "").toLowerCase();
+    friends.push(newFriend);
+    console.log(newFriend.scores);
+});
+
 module.exports = router;

@@ -10,6 +10,22 @@ var questions = ["Rock-climbing?",
     "Always being on the move, carrying out activities with others?"
 ];
 var friendNums = [];
+var testObj = {
+    name: "front",
+    photo: "#2",
+    scores:[
+        5,
+        5,
+        5,
+        2,
+        2,
+        2,
+        8,
+        8,
+        8,
+        1
+    ]
+}
 
 if($("#questionairre")){
     $("#questionairre").empty();
@@ -29,23 +45,29 @@ if($("#questionairre")){
         $("#questionairre").append(`</div></section>`);
         if(i === questions.length - 1){
             $("#questionairre").append(`<button type="button" class="btn btn-primary" id="tester-bb" data-toggle="modal" data-target="#friendFound">Submit</button>`);
-            $("#tester-bb").prop("disabled", true);
+            // $("#tester-bb").prop("disabled", true);
         };
     });
 };
 
 function submitSurvey(passed){
     $("#tester-bb").click(function(){
-        $("#friendo-show-o").empty();
-        $.get("/api/friends/", function(data){
-            for(var prop in data[0]){
-                $("#friendo-show-o").append("<h1>" + data[0][prop] + "</h1>");
-            };
-        });
+        event.preventDefault();
+        if(passed){
+            $.post("/api/friends", passed);
+            $("#friendo-show-o").empty();
+            $.get("/api/friends/", function(data){
+                console.log(data);
+                for(var prop in data[2]){
+                    $("#friendo-show-o").append("<h1>" + data[2][prop] + "</h1>");
+                };
+            });
+        }
     });
 };
-
+submitSurvey(testObj);
 $(".btn-choices-in").click(function(){
+    event.preventDefault();
     $.each(questions, function(i){
         var numPush = $(`input[name=ansRadio${i}]:checked`).val();
         friendNums[i] = numPush;
@@ -55,6 +77,6 @@ $(".btn-choices-in").click(function(){
             return;
         };
     };
-    $("#tester-bb").prop("disabled", false);
-    submitSurvey(friendNums);
+    // $("#tester-bb").prop("disabled", false);
+    // submitSurvey(friendNums);
 });
