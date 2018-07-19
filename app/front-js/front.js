@@ -28,8 +28,8 @@ if($("#questionairre")){
             };
         $("#questionairre").append(`</div></section>`);
         if(i === questions.length - 1){
-            $("#questionairre").append(`<button id="switch-me" class="btn btn-primary">Submit</button>`);
-            $("#switch-me").prop("disabled", true);
+            $("#questionairre").append(`<button type="button" class="btn btn-primary" id="tester-bb" data-toggle="modal" data-target="#friendFound">Submit</button>`);
+            $("#tester-bb").prop("disabled", true);
         };
     });
 };
@@ -53,6 +53,6 @@ $(".btn-choices-in").click(function(){
             return;
         };
     };
-    $("button#switch-me").prop("disabled", false);
+    $("#tester-bb").prop("disabled", false);
 });
 
