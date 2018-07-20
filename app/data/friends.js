@@ -13,8 +13,7 @@ var friends = [
             8,
             9,
             10
-        ],
-        "routeName": "name"
+        ]
     },
     {
         "name": "test",
@@ -30,8 +29,7 @@ var friends = [
             8,
             9,
             10
-        ],
-        "routeName": "test"
+        ]
     }
 ];
 

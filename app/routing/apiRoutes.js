@@ -13,20 +13,26 @@ var express = require("express"),
 router.use(bodyParser.urlencoded({extended: true}));
 router.use(bodyParser.json());
 
-router.get("/api/friends/:friend", function(req, res){
-    var choiced = req.params.friend;
-    for (var i = 0; i < friends.length; i++){
-        if (choiced === friends[i].name){
-            return res.json(friends[i]);
-        }
-    };
+router.get("/api/friends", function(req, res){
+    var choiced = res.body;
     return res.json(friends);
 });
 
 router.post("/api/friends", function(req, res){
     var newFriend = req.body;
-    newFriend.routeName = newFriend.name.replace(/\s+/g, "").toLowerCase();
-    friends.push(newFriend);
+    var scoreHolder = [];
+    if(!friends.includes(newFriend)){
+        friends.push(newFriend);
+    }
+        for (var i = 0; i < friends.length; i++){
+            if (newFriend !== friends[i]){
+                scoreHolder.push(friends[i]);
+            };
+        };
+    console.log(scoreHolder);
+    return res.json(friends);
+    return res.json(scoreHolder);
+    return res.json(newFriend);
 });
 
 module.exports = router;

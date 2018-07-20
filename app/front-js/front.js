@@ -51,22 +51,25 @@ if($("#questionairre")){
 };
 
 function submitSurvey(passed){
-    $("#tester-bb").click(function(){
-        event.preventDefault();
+    // $("#tester-bb").click(function(){
+        // event.preventDefault();
         if(passed){
-            var passName = passed.name.replace(/\s_/g, "").toLowerCase();
-            $.post("/api/friends", passed);
+            var passConcat = passed.name;
+            var passName = passConcat.replace(/\s_/g, "").toLowerCase();
             $("#friendo-show-o").empty();
-            $.get("/api/friends/" + passName, function(data){
-                console.log(data);
-                for(var prop in data[2]){
-                    $("#friendo-show-o").append("<h1>" + data[2][prop] + "</h1>");
+            $.post("/api/friends", passed)
+              .then(data =>{
+                  console.log(data);
+                var test = [];
+                for(var prop in data){
+                    test.push(data[prop][2]);
                 };
+                console.log(test);
             });
         }
-    });
+    // });
 };
-// submitSurvey(testObj);
+
 $(".btn-choices-in").click(function(){
     $.each(questions, function(i){
         var numPush = $(`input[name=ansRadio${i}]:checked`).val();
