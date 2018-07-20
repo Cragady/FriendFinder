@@ -13,7 +13,13 @@ var express = require("express"),
 router.use(bodyParser.urlencoded({extended: true}));
 router.use(bodyParser.json());
 
-router.get("/api/friends", function(req, res){
+router.get("/api/friends/:friend", function(req, res){
+    var choiced = req.params.friend;
+    for (var i = 0; i < friends.length; i++){
+        if (choiced === friends[i].name){
+            return res.json(friends[i]);
+        }
+    };
     return res.json(friends);
 });
 
@@ -21,7 +27,6 @@ router.post("/api/friends", function(req, res){
     var newFriend = req.body;
     newFriend.routeName = newFriend.name.replace(/\s+/g, "").toLowerCase();
     friends.push(newFriend);
-    console.log(newFriend.scores);
 });
 
 module.exports = router;

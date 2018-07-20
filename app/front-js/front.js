@@ -45,7 +45,7 @@ if($("#questionairre")){
         $("#questionairre").append(`</div></section>`);
         if(i === questions.length - 1){
             $("#questionairre").append(`<button type="button" class="btn btn-primary" id="tester-bb" data-toggle="modal" data-target="#friendFound">Submit</button>`);
-            // $("#tester-bb").prop("disabled", true);
+            $("#tester-bb").prop("disabled", true);
         };
     });
 };
@@ -54,9 +54,10 @@ function submitSurvey(passed){
     $("#tester-bb").click(function(){
         event.preventDefault();
         if(passed){
+            var passName = passed.name.replace(/\s_/g, "").toLowerCase();
             $.post("/api/friends", passed);
             $("#friendo-show-o").empty();
-            $.get("/api/friends/", function(data){
+            $.get("/api/friends/" + passName, function(data){
                 console.log(data);
                 for(var prop in data[2]){
                     $("#friendo-show-o").append("<h1>" + data[2][prop] + "</h1>");
@@ -65,9 +66,8 @@ function submitSurvey(passed){
         }
     });
 };
-submitSurvey(testObj);
+// submitSurvey(testObj);
 $(".btn-choices-in").click(function(){
-    event.preventDefault();
     $.each(questions, function(i){
         var numPush = $(`input[name=ansRadio${i}]:checked`).val();
         friendNums[i] = numPush;
@@ -77,6 +77,6 @@ $(".btn-choices-in").click(function(){
             return;
         };
     };
-    // $("#tester-bb").prop("disabled", false);
-    // submitSurvey(friendNums);
+    $("#tester-bb").prop("disabled", false);
+    submitSurvey(friendNums);
 });
