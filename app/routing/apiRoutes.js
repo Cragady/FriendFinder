@@ -21,18 +21,22 @@ router.get("/api/friends", function(req, res){
 router.post("/api/friends", function(req, res){
     var newFriend = req.body;
     var scoreHolder = [];
-    if(!friends.includes(newFriend)){
-        friends.push(newFriend);
-    }
-        for (var i = 0; i < friends.length; i++){
-            if (newFriend !== friends[i]){
-                scoreHolder.push(friends[i]);
-            };
+    var pushSwitch = true;
+    for (var i = 0; i < friends.length; i++){
+        if (newFriend.name !== friends[i].name){
+            console.log(newFriend.name + " " + friends[0].name);
+            scoreHolder.push(friends[i]);
+        } else {
+            pushSwitch = false;
         };
-    console.log(scoreHolder);
+    };
+    if(pushSwitch){
+        friends.push(newFriend);
+    };
+    // console.log(scoreHolder);
     return res.json(friends);
-    return res.json(scoreHolder);
-    return res.json(newFriend);
+    // return res.json(scoreHolder);
+    // return res.json(newFriend);
 });
 
 module.exports = router;

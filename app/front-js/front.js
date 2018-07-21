@@ -62,7 +62,7 @@ function submitSurvey(passed){
                   console.log(data);
                 var test = [];
                 for(var prop in data){
-                    test.push(data[prop][2]);
+                    test.push(data[prop]);
                 };
                 console.log(test);
             });
