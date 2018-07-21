@@ -57,12 +57,20 @@ function submitSurvey(passed){
             $("#friendo-show-o").empty();
             $.post("/api/friends", passed)
               .then(data =>{
+                  var slots = {text: "Name: ", text: "Picture: ", text: "Scores: "};
                   console.log(data);
-                var test = [];
-                for(var prop in data){
-                    test.push(data[prop]);
-                };
-                console.log(test);
+                //   for(var i = 0; i < data.length; i++){
+                //       $("#friendo-show-o").append(data);
+                //   };
+                $("#friendo-show-o").append(`
+                <div>${data.name}</div>
+                <img src="${data.photo}" alt="Picture of ${data.name}">`);
+                  console.log(typeof data);
+                  console.log(data);
+                //   var test = [];
+                //   for(var prop in data){
+                //       test.push(data[prop]);
+                //   };
             });
         }
     // });//
