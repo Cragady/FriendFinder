@@ -45,7 +45,7 @@ router.post("/api/friends", function(req, res){
                 console.log("changed!!");
             }; 
             if(i === friends.length - 1){ lowest = objex; console.log("lowest = " + lowest)};
-            //use if diff < new diff, lowest = new diff
+            //use if diff < new diff, lowest = new diff 
             console.log(lowest);
             console.log(objex);
 
