@@ -29,7 +29,12 @@ var testObj = {
 
 if($("#questionairre")){
     $("#questionairre").empty();
-    $("#questionairre").append(`<h3 class="card-header">On a scale of 1-10, how much do you like . . .</h3>`)
+    $("#questionairre").append(`
+        <h2 class="card-header text-center">Who Are You?</h2>
+        <input class="mx-1 my-3" id="who-are-you">
+        <h2 class="card-header text-center">Picture Link</h2>
+        <input class="mx-1 my-3" id="pic-link">
+        <h3 class="card-header">On a scale of 1-10, how much do you like . . .</h3>`)
     $.each(questions, function(i){
         $("#questionairre").append(`<section class="card bg-light my-5 py-2 text-center">
         <h4>${questions[i]}</h4>
