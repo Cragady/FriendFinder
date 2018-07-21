@@ -38,10 +38,14 @@ router.post("/api/friends", function(req, res){
             var scorenate = scoreDiff.reduce((a, b) => a + b, 0);
             scoreConcat.push({ind: i, diff: scorenate});
             console.log(scoreConcat[i].ind + " " + scoreConcat[i].diff);            
-            if(i === 0){ lowest = scoreConcat[i].diff };
-            var objex = scoreConcat.findIndex(x => x.diff <= lowest);
-            lowest = scoreConcat[objex].diff;
+            if(i === 0){ lowest = scoreConcat[i].diff; };
+            var objex = scoreConcat.findIndex(x => x.diff === lowest);
+            if(scoreConcat[i].diff <= lowest){
+                lowest = scoreConcat[i].diff;
+                console.log("changed!!");
+            }; 
             if(i === friends.length - 1){ lowest = objex; console.log("lowest = " + lowest)};
+            //use if diff < new diff, lowest = new diff
             console.log(lowest);
             console.log(objex);
 

@@ -51,8 +51,8 @@ if($("#questionairre")){
 };
 
 function submitSurvey(passed){
-    // $("#tester-bb").click(function(){
-        // event.preventDefault();
+    // $("#tester-bb").click(function(){//
+        // event.preventDefault();//
         if(passed){
             $("#friendo-show-o").empty();
             $.post("/api/friends", passed)
@@ -65,7 +65,7 @@ function submitSurvey(passed){
                 console.log(test);
             });
         }
-    // });
+    // });//
 };
 
 $(".btn-choices-in").click(function(){

@@ -16,6 +16,22 @@ var friends = [
         ]
     },
     {
+        "name": "lowest",
+        "photo": "#",
+        "scores":[
+            5,
+            5,
+            5,
+            2,
+            2,
+            2,
+            8,
+            8,
+            8,
+            1,
+        ]
+    },
+    {
         "name": "test",
         "photo": "#",
         "scores":[
