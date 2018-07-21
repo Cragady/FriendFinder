@@ -19,23 +19,32 @@ router.get("/api/friends", function(req, res){
 });
 
 router.post("/api/friends", function(req, res){
-    var newFriend = req.body;
-    var scoreHolder = [];
-    var pushSwitch = true;
+    var newFriend = req.body,
+        scoreConcat = [],
+        pushSwitch = true,
+        newScore = req["body"]["scores"].map(a => {return parseFloat(a, 10)})
+    ;
     for (var i = 0; i < friends.length; i++){
         if (newFriend.name !== friends[i].name){
-            console.log(newFriend.name + " " + friends[0].name);
-            scoreHolder.push(friends[i]);
+            var scoreDiff = newScore.map(function(item, index){
+                var scoreHolder = item - friends[i]["scores"][index];
+                if(scoreHolder < 0 ){
+                    scoreHolder *= -1;
+                };
+                return scoreHolder;
+            });
+            var scorenate = scoreDiff.reduce((a, b) => a + b, 0);
+            scoreConcat.push(scorenate);
+
         } else {
             pushSwitch = false;
         };
     };
+    console.log(scoreConcat);
     if(pushSwitch){
         friends.push(newFriend);
     };
-    // console.log(scoreHolder);
     return res.json(friends);
-    // return res.json(scoreHolder);
     // return res.json(newFriend);
 });
 

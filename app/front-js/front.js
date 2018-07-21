@@ -54,8 +54,6 @@ function submitSurvey(passed){
     // $("#tester-bb").click(function(){
         // event.preventDefault();
         if(passed){
-            var passConcat = passed.name;
-            var passName = passConcat.replace(/\s_/g, "").toLowerCase();
             $("#friendo-show-o").empty();
             $.post("/api/friends", passed)
               .then(data =>{
