@@ -22,7 +22,8 @@ router.post("/api/friends", function(req, res){
     var newFriend = req.body,
         scoreConcat = [],
         pushSwitch = true,
-        newScore = req["body"]["scores"].map(a => {return parseFloat(a, 10)})
+        newScore = req["body"]["scores"].map(a => {return parseFloat(a, 10)}),
+        lowest = "";
     ;
     for (var i = 0; i < friends.length; i++){
         if (newFriend.name !== friends[i].name){
@@ -33,8 +34,16 @@ router.post("/api/friends", function(req, res){
                 };
                 return scoreHolder;
             });
+
             var scorenate = scoreDiff.reduce((a, b) => a + b, 0);
-            scoreConcat.push(scorenate);
+            scoreConcat.push({ind: i, diff: scorenate});
+            console.log(scoreConcat[i].ind + " " + scoreConcat[i].diff);            
+            if(i === 0){ lowest = scoreConcat[i].diff };
+            var objex = scoreConcat.findIndex(x => x.diff <= lowest);
+            lowest = scoreConcat[objex].diff;
+            if(i === friends.length - 1){ lowest = objex; console.log("lowest = " + lowest)};
+            console.log(lowest);
+            console.log(objex);
 
         } else {
             pushSwitch = false;
@@ -44,7 +53,8 @@ router.post("/api/friends", function(req, res){
     if(pushSwitch){
         friends.push(newFriend);
     };
-    return res.json(friends);
+    var iteratorHopping = scoreConcat[lowest].ind;
+    return res.json(friends[iteratorHopping]);
     // return res.json(newFriend);
 });
 
