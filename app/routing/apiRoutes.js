@@ -9,7 +9,6 @@ router.use(bodyParser.urlencoded({extended: true}));
 router.use(bodyParser.json());
 
 router.get("/api/friends", function(req, res){
-    var choiced = res.body;
     return res.json(friends);
 });
 
