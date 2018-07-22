@@ -17,22 +17,6 @@ function friendIn(numsPasser){
     this.photo = $("#pic-link").val().trim();
     this.scores = numsPasser;
 }
-var testObj = {
-    name: "front",
-    photo: "#2",
-    scores:[
-        5,
-        5,
-        5,
-        2,
-        2,
-        2,
-        8,
-        8,
-        8,
-        1
-    ]
-}
 
 function pageWriterStarter(){
     if($("#questionairre")){
