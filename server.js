@@ -6,7 +6,7 @@ var express = require("express"),
     PORT =  process.env.PORT || 3000
 ;
 
-app.use(express.static(path.join(__dirname, "./app/front-js")));
+app.use(express.static(path.join(__dirname, "./app/front-js-css")));
 app.use("/", htmlRoutes);
 app.use("/", apiRoutes);
 

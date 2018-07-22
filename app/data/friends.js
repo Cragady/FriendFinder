@@ -1,49 +1,49 @@
 var friends = [
     {
-        "name": "Name",
-        "photo": "#",
+        "name": "Aang",
+        "photo": "media/Aang.png",
         "scores":[
             1,
-            2,
-            3,
             4,
-            5,
+            4,
             6,
-            7,
-            8,
             9,
-            10
+            10,
+            10,
+            3,
+            5,
+            9
         ]
     },
     {
-        "name": "lowest",
-        "photo": "#",
+        "name": "Sakura",
+        "photo": "media/Sakura.jpg",
         "scores":[
-            5,
-            5,
-            5,
+            1,
+            10,
+            10,
+            10,
+            1,
+            1,
             2,
-            2,
-            2,
-            8,
-            8,
-            8,
+            1,
+            1,
             1,
         ]
     },
     {
-        "name": "test",
-        "photo": "#",
+        "name": "Link",
+        "photo": "media/link.png",
         "scores":[
-            1,
-            2,
-            3,
-            4,
-            5,
+            10,
             6,
-            7,
-            8,
-            9,
+            6,
+            3,
+            5,
+            10,
+            10,
+            2,
+            6,
             10
         ]
     }

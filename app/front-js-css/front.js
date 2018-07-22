@@ -44,7 +44,7 @@ function pageWriterStarter(){
                 };
             $("#questionairre").append(`</div></section>`);
             if(i === questions.length - 1){
-                $("#questionairre").append(`<button type="button" class="btn btn-primary" id="tester-bb" data-toggle="modal" data-target="#friendFound">Submit</button>`);
+                $("#questionairre").append(`<button type="button" class="btn btn-primary mb-3 ml-3 mr-auto" id="tester-bb" data-toggle="modal" data-target="#friendFound">Submit</button>`);
                 $("#tester-bb").prop("disabled", true);
             };
         });
@@ -63,13 +63,27 @@ function submitSurvey(){
 
 function responseWriter(writing){
     $("#friendo-show-o").empty();
-    $.post("/api/friends", writing())
-      .then(data =>{
-        $("#friendo-show-o").append(`
-        <div>${data.name}</div>
-        <img src="${data.photo}" alt="Picture of ${data.name}">`);
-    });
-}
+    console.log(writing().name);
+    if((writing().name === "Link ") || (writing().name === "Sakura ") || (writing().name === "Aang ")){
+        $("#friendo-show-o").append("<div>Please Make a change to the first name, or add a second name</div>");
+    } else {
+        $.post("/api/friends", writing())
+        .then(data =>{
+            if(data !== undefined){
+                $("#friendo-show-o").append(`
+                <h2>${data.name}</h2>
+                <hr>
+                <img class="mx-auto d-block rounded img-fluid" src="${data.photo}" alt="Picture of ${data.name}">`);
+            } else {
+                $("#friendo-show-o").append(`
+                    <div>Please make a change to the first name
+                    or add a second name.
+                    </div>
+                `);
+            };
+        });
+    };
+};
 
 
 function radioSetter(){
