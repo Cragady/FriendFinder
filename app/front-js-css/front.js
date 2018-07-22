@@ -28,7 +28,7 @@ function pageWriterStarter(){
                 <input class="mx-1 my-3 col-5" id="second-nam" placeholder="last"   >
             </div>
             <h2 class="card-header text-center">Picture Link</h2>
-            <input class="mx-1 my-3" id="pic-link">
+            <input class="mx-1 my-3" id="pic-link" placeholder="URL to photo">
             <h3 class="card-header">On a scale of 1-10, how much do you like . . .</h3>`)
         $.each(questions, function(i){
             $("#questionairre").append(`<section class="card bg-light my-5 py-2 text-center">
@@ -44,7 +44,7 @@ function pageWriterStarter(){
                 };
             $("#questionairre").append(`</div></section>`);
             if(i === questions.length - 1){
-                $("#questionairre").append(`<button type="button" class="btn btn-primary mb-3 ml-3 mr-auto" id="tester-bb" data-toggle="modal" data-target="#friendFound">Submit</button>`);
+                $("#questionairre").append(`<button type="button" class="btn btn-cust mb-3 ml-3 mr-auto" id="tester-bb" data-toggle="modal" data-target="#friendFound">Submit</button>`);
                 $("#tester-bb").prop("disabled", true);
             };
         });
