@@ -18,19 +18,17 @@ router.get("/api/friends", function(req, res){
     return res.json(friends);
 });
 
-router.put("/api/gtctpwstpcctditn", function(req, res){
-
-});
-
 router.post("/api/friends", function(req, res){
     var newFriend = req.body,
         scoreConcat = [],
         pushSwitch = true,
         newScore = req["body"]["scores"].map(a => {return parseFloat(a, 10)}),
         lowest = "",
-        objex = "";
+        objex = "",
+        randomizer = [];
     ;
     for (var i = 0; i < friends.length; i++){
+
         if (newFriend.name !== friends[i].name){
             var scoreDiff = newScore.map(function(item, index){
                 var scoreHolder = item - friends[i]["scores"][index];
@@ -44,22 +42,46 @@ router.post("/api/friends", function(req, res){
             scoreConcat.push({ind: i, diff: scorenate});
             if(i === 0){ lowest = scoreConcat[i].diff; };
             objex = scoreConcat.findIndex(x => x.diff === lowest);
+
             if(scoreConcat[i].diff <= lowest){
                 lowest = scoreConcat[i].diff;
-            }; 
-            if(i === friends.length - 1){ lowest = objex;  console.log("change" + lowest);};
-            console.log(i +" first " + lowest);
+                randomizer.push({ind2: i, lowStore: lowest});
+            };
+             
+            if(i === friends.length - 1){ 
+                if(randomizer.length > 1){
+                    for(var rI = 0; rI < randomizer.length; rI++){
+                        if(randomizer[rI].lowStore > lowest){
+                            randomizer.splice(rI, 1);
+                        };      
+                    };
+                    var randInd = Math.floor(Math.random() * randomizer.length);
+                    objex = randomizer[randInd].ind2;
+                };
+                lowest = objex;
+            };
         } else {
+
             pushSwitch = false;
-            if(i === friends.length - 1){ lowest = objex; };
-            console.log(i + " " + lowest);
+            if(i === friends.length - 1){
+                if(randomizer.length > 1){
+                    for(var rI = 0; rI < randomizer.length; rI++){
+                        if(randomizer[rI].lowStore > lowest){
+                            randomizer.splice(rI, 1);
+                        };      
+                    };
+                    var randInd = Math.floor(Math.random() * randomizer.length);
+                    objex = randomizer[randInd].ind2;
+                }; 
+                lowest = objex;
+            };
         };
     };
+
     if(pushSwitch){
         friends.push(newFriend);
     };
     var iteratorHopping = scoreConcat[lowest].ind;
-    console.log(iteratorHopping + " " + newFriend.name);
     return res.json(friends[iteratorHopping]);
     // return res.json(newFriend);
 });
