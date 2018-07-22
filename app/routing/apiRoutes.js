@@ -1,8 +1,3 @@
-//a GET route with the url /api/friends used to display
-//json*/
-//a POST route /api/friends this will handle survey results 
-//this route will also be used to handle compatibility logic
-
 var express = require("express"),
     friends = require("../data/friends"),
     router = express.Router(),
@@ -83,7 +78,6 @@ router.post("/api/friends", function(req, res){
     };
     var iteratorHopping = scoreConcat[lowest].ind;
     return res.json(friends[iteratorHopping]);
-    // return res.json(newFriend);
 });
 
 module.exports = router;
