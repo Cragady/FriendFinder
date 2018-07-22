@@ -18,12 +18,17 @@ router.get("/api/friends", function(req, res){
     return res.json(friends);
 });
 
+router.put("/api/gtctpwstpcctditn", function(req, res){
+
+});
+
 router.post("/api/friends", function(req, res){
     var newFriend = req.body,
         scoreConcat = [],
         pushSwitch = true,
         newScore = req["body"]["scores"].map(a => {return parseFloat(a, 10)}),
-        lowest = "";
+        lowest = "",
+        objex = "";
     ;
     for (var i = 0; i < friends.length; i++){
         if (newFriend.name !== friends[i].name){
@@ -37,27 +42,24 @@ router.post("/api/friends", function(req, res){
 
             var scorenate = scoreDiff.reduce((a, b) => a + b, 0);
             scoreConcat.push({ind: i, diff: scorenate});
-            console.log(scoreConcat[i].ind + " " + scoreConcat[i].diff);            
             if(i === 0){ lowest = scoreConcat[i].diff; };
-            var objex = scoreConcat.findIndex(x => x.diff === lowest);
+            objex = scoreConcat.findIndex(x => x.diff === lowest);
             if(scoreConcat[i].diff <= lowest){
                 lowest = scoreConcat[i].diff;
-                console.log("changed!!");
             }; 
-            if(i === friends.length - 1){ lowest = objex; console.log("lowest = " + lowest)};
-            //use if diff < new diff, lowest = new diff 
-            console.log(lowest);
-            console.log(objex);
-
+            if(i === friends.length - 1){ lowest = objex;  console.log("change" + lowest);};
+            console.log(i +" first " + lowest);
         } else {
             pushSwitch = false;
+            if(i === friends.length - 1){ lowest = objex; };
+            console.log(i + " " + lowest);
         };
     };
-    console.log(scoreConcat);
     if(pushSwitch){
         friends.push(newFriend);
     };
     var iteratorHopping = scoreConcat[lowest].ind;
+    console.log(iteratorHopping + " " + newFriend.name);
     return res.json(friends[iteratorHopping]);
     // return res.json(newFriend);
 });

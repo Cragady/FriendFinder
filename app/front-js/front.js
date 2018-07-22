@@ -9,7 +9,14 @@ var questions = ["Rock-climbing?",
     "Relaxing by doing nothing with others?",
     "Always being on the move, carrying out activities with others?"
 ];
+var contPostSwitch = false;
 var friendNums = [];
+function friendIn(numsPasser){
+    this.name = $("#first-nam").val().trim() +
+        " " + $("#second-nam").val().trim();
+    this.photo = $("#pic-link").val().trim();
+    this.scores = numsPasser;
+}
 var testObj = {
     name: "front",
     photo: "#2",
@@ -31,7 +38,10 @@ if($("#questionairre")){
     $("#questionairre").empty();
     $("#questionairre").append(`
         <h2 class="card-header text-center">Who Are You?</h2>
-        <input class="mx-1 my-3" id="who-are-you">
+        <div class="row justify-content-center">
+            <input class="mx-1 my-3 col-5" id="first-nam" placeholder="first">
+            <input class="mx-1 my-3 col-5" id="second-nam" placeholder="last"   >
+        </div>
         <h2 class="card-header text-center">Picture Link</h2>
         <input class="mx-1 my-3" id="pic-link">
         <h3 class="card-header">On a scale of 1-10, how much do you like . . .</h3>`)
@@ -55,42 +65,49 @@ if($("#questionairre")){
     });
 };
 
-function submitSurvey(passed){
-    // $("#tester-bb").click(function(){//
-        // event.preventDefault();//
-        if(passed){
-            $("#friendo-show-o").empty();
-            $.post("/api/friends", passed)
-              .then(data =>{
-                  var slots = {text: "Name: ", text: "Picture: ", text: "Scores: "};
-                  console.log(data);
-                //   for(var i = 0; i < data.length; i++){
-                //       $("#friendo-show-o").append(data);
-                //   };
-                $("#friendo-show-o").append(`
-                <div>${data.name}</div>
-                <img src="${data.photo}" alt="Picture of ${data.name}">`);
-                  console.log(typeof data);
-                  console.log(data);
-                //   var test = [];
-                //   for(var prop in data){
-                //       test.push(data[prop]);
-                //   };
-            });
-        }
-    // });//
+function submitSurvey(){
+    $("#tester-bb").click(function(){//
+        event.preventDefault();//
+        responseWriter(radioSetter);
+    });//
 };
 
-$(".btn-choices-in").click(function(){
-    $.each(questions, function(i){
-        var numPush = $(`input[name=ansRadio${i}]:checked`).val();
-        friendNums[i] = numPush;
+function responseWriter(writing){
+    $("#friendo-show-o").empty();
+    $.post("/api/friends", writing())
+      .then(data =>{
+        $("#friendo-show-o").append(`
+        <div>${data.name}</div>
+        <img src="${data.photo}" alt="Picture of ${data.name}">`);
     });
-    for(var i = 0; i < 10; i ++){
-        if(friendNums[i] === undefined){
-            return;
+}
+
+
+// $("#tester-bb").prop("disabled", false);
+// submitSurvey(testObj);
+function radioSetter(){
+    var friendPass = new friendIn(friendNums);
+    return friendPass;
+};
+
+function radioClicker(){
+    $(".btn-choices-in").click(function(){
+        $.each(questions, function(i){
+            var numPush = $(`input[name=ansRadio${i}]:checked`).val();
+            friendNums[i] = numPush;
+        });
+        for(var i = 0; i < questions.length; i ++){
+            if(friendNums[i] === undefined){
+                return;
+            };
         };
-    };
-    $("#tester-bb").prop("disabled", false);
-    submitSurvey(friendNums);
-});
+        $("#tester-bb").prop("disabled", false);
+        //submitSurvey(friendPass);
+    });
+};
+
+radioClicker();
+submitSurvey();
+// console.log(radioSetter());
+
+
