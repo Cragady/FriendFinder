@@ -1,5 +1,7 @@
 .bg-back-home{
     background: url("media/home-back.jpg");
+    background-repeat: none;
+    background-size: cover;
 }
 
 input{
